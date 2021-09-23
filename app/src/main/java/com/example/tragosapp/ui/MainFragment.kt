@@ -13,20 +13,22 @@ import com.example.tragosapp.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
-    private lateinit var binding: FragmentMainBinding
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentMainBinding.inflate(layoutInflater)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
