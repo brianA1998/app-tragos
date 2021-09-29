@@ -1,5 +1,8 @@
 package com.example.tragosapp.domain
 
+import com.example.tragosapp.data.model.Drink
+import com.example.tragosapp.vo.Resource
+
 interface Repo {
-    fun getTragoslist()
+    fun getTragosList(): Resource<List<Drink>>
 }
