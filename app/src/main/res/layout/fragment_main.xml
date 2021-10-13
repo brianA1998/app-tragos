@@ -8,17 +8,9 @@
     tools:context=".ui.MainFragment">
 
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tragos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="FRAGMENT LISTA TRAGOS"
-        android:textSize="25sp" />
-
-    <Button
-        android:id="@+id/btn_ir_detalles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ir a detalles" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
