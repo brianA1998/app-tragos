@@ -10,8 +10,16 @@ import com.example.tragosapp.base.BaseViewHolder
 import com.example.tragosapp.data.model.Drink
 import com.example.tragosapp.databinding.TragosRowBinding
 
-class MainAdapter(private val context: Context, private val tragosList: List<Drink>) :
+class MainAdapter(
+    private val context: Context,
+    private val tragosList: List<Drink>,
+    private val itemClickListener: OnTragoClickListener
+) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
+
+    interface OnTragoClickListener {
+        fun onTragoClick(drink: Drink)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -34,9 +42,10 @@ class MainAdapter(private val context: Context, private val tragosList: List<Dri
         override fun bind(item: Drink, position: Int) {
 
 
-            Glide.with(context).load(item.imagen).into(binding.imgTrago)
+            Glide.with(context).load(item.imagen).centerCrop().into(binding.imgTrago)
             binding.txtTitulo.text = item.nombre
             binding.txtDescripcion.text = item.descripcion
+            binding.root.setOnClickListener { itemClickListener.onTragoClick(item) }
         }
 
     }

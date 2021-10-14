@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tragosapp.R
 import com.example.tragosapp.data.DataSource
+import com.example.tragosapp.data.model.Drink
 import com.example.tragosapp.databinding.FragmentMainBinding
 import com.example.tragosapp.domain.RepoImpl
 import com.example.tragosapp.ui.viewmodel.MainViewModel
@@ -20,7 +21,7 @@ import com.example.tragosapp.ui.viewmodel.VMFactory
 import com.example.tragosapp.vo.Resource
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     private val viewModel by viewModels<MainViewModel> {
         VMFactory(RepoImpl(DataSource()))
     }
@@ -52,7 +53,7 @@ class MainFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.rvTragos.adapter = MainAdapter(requireContext(), result.data)
+                    binding.rvTragos.adapter = MainAdapter(requireContext(), result.data, this)
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
@@ -74,6 +75,12 @@ class MainFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+    }
+
+    override fun onTragoClick(drink: Drink) {
+        val bundle = Bundle()
+        bundle.putParcelable("drink", drink)
+        findNavController().navigate(R.id.tragosDetalleFragment, bundle)
     }
 
 }
