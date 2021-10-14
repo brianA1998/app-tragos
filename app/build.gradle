@@ -8,6 +8,11 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+
+        configurations.all {
+            resolveStrategy{force 'androidx.core:core-ktx:1.6.0'}
+        }
+
         applicationId "com.example.tragosapp"
         minSdkVersion 21
         targetSdkVersion 30
